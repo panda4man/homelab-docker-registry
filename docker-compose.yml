@@ -7,4 +7,5 @@ services:
       - "${ZOT_PORT:-5050}:5000"
     volumes:
       - ./config.json:/etc/zot/config.json:ro
+      - ./config/htpasswd:/etc/zot/htpasswd:ro
       - ${ZOT_DATA_DIR:-./data}:/var/lib/registry

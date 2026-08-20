@@ -5,7 +5,30 @@
   },
   "http": {
     "address": "0.0.0.0",
-    "port": "5000"
+    "port": "5000",
+    "auth": {
+      "htpasswd": {
+        "path": "/etc/zot/htpasswd"
+      }
+    },
+    "accessControl": {
+      "repositories": {
+        "**": {
+          "policies": [
+            {
+              "users": ["github_actions"],
+              "actions": ["read", "create", "update"]
+            }
+          ],
+          "defaultPolicy": ["read"],
+          "anonymousPolicy": ["read"]
+        }
+      },
+      "adminPolicy": {
+        "users": [],
+        "actions": ["read", "create", "update", "delete"]
+      }
+    }
   },
   "log": {
     "level": "info"
