@@ -9,16 +9,18 @@ Built as an alternative to GHCR — local infra and storage already available, n
 - `docker-compose.yml` — zot service definition
 - `config.json` — zot registry config (storage path, HTTP listener, search/UI extensions)
 - `data/` — registry storage (images, metadata) — bind-mounted, gitignored
-- `.env` — local port override, gitignored (copy from `.env.example`)
+- `.env` — local port/data-dir overrides, gitignored (copy from `.env.example`)
 
 Bind mounts instead of named volumes, so the whole stack — config, data, compose file — lives in this one directory and backs up as a single unit.
 
 ## Usage
 
 ```bash
-cp .env.example .env   # adjust ZOT_PORT if needed
+cp .env.example .env   # adjust ZOT_PORT / ZOT_DATA_DIR if needed
 docker compose up -d
 ```
+
+`ZOT_DATA_DIR` defaults to `./data`. On real hosts with dedicated storage, point it elsewhere, e.g. `ZOT_DATA_DIR=/srv/zot/data`.
 
 Registry API + web UI: `http://localhost:${ZOT_PORT:-5050}`
 
